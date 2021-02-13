@@ -5,9 +5,9 @@ ft_strcpy:
 	xor		rcx, rcx
 
 copy_chars:
-	cmp		byte [rsi + rcx], 0
+	cmp		byte [rsi + rcx], 0 ;rsi : 2nd parameter
 	jz		return
-	mov		dl, byte [rsi + rcx]
+	mov		dl, byte [rsi + rcx] ; dl is a space to store a byte
 	mov		byte [rdi + rcx], dl
 	inc		rcx
 	jmp		copy_chars

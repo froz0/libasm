@@ -6,17 +6,51 @@
 /*   By: tmatis <tmatis@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/02/13 13:39:27 by tmatis            #+#    #+#             */
-/*   Updated: 2021/02/13 18:29:46 by tmatis           ###   ########.fr       */
+/*   Updated: 2021/02/13 22:32:15 by tmatis           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include <stdio.h>
 #include <stdlib.h>
+#include <unistd.h>
 #include <string.h>
 #include "assert/assert.h"
 
 size_t	ft_strlen(char *str);
 char	*ft_strcpy(char *dest, char *src);
+int		ft_strcmp(const char *s1, const char *s2);
+ssize_t	ft_write(int fd, const void *buf, size_t nbyte);
+
+void	test_write(t_tests	*tests)
+{
+	int	ret;
+	(void)tests;
+	char	*str = "hello\n";
+	ret = ft_write(50, str, 3);
+	printf("ret: %i\n", ret);
+}	
+void	test_strcmp(t_tests *tests)
+{
+	char	*str1 = "Hello world";
+	char	*str2 = "";
+	char	*str3 = "Hello";
+	char	*str4 = "Nothing";
+
+	ft_assert_cmp(ft_strcmp(str1, str1), strcmp(str1, str1),
+			"Compare output with original", tests);
+	ft_assert_cmp(ft_strcmp(str1, str2), strcmp(str1, str2),
+			"Compare output with original", tests);
+	ft_assert_cmp(ft_strcmp(str2, str1), strcmp(str2, str1),
+			"Compare output with original", tests);
+	ft_assert_cmp(ft_strcmp(str3, str1), strcmp(str3, str1),
+			"Compare output with original", tests);
+	ft_assert_cmp(ft_strcmp(str3, str4), strcmp(str3, str4),
+			"Compare output with original", tests);
+	ft_assert_cmp(ft_strcmp(str4, str3), strcmp(str4, str3),
+			"Compare output with original", tests);
+	ft_assert_cmp(ft_strcmp(str2, str2), strcmp(str2, str2),
+			"Compare output with original", tests);
+}
 
 void	test_strcpy(t_tests *tests)
 {
@@ -64,6 +98,8 @@ int	main(int argc, char **argv)
 	tests_header(&tests);
 	test_strlen(&tests);
 	test_strcpy(&tests);
+	test_strcmp(&tests);
+	test_write(&tests);
 	tests_result(&tests);
 	return (0);
 }
