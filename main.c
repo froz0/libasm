@@ -6,7 +6,7 @@
 /*   By: tmatis <tmatis@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/02/13 13:39:27 by tmatis            #+#    #+#             */
-/*   Updated: 2021/02/13 22:32:15 by tmatis           ###   ########.fr       */
+/*   Updated: 2021/02/13 22:44:31 by tmatis           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,6 +14,7 @@
 #include <stdlib.h>
 #include <unistd.h>
 #include <string.h>
+#include <errno.h>
 #include "assert/assert.h"
 
 size_t	ft_strlen(char *str);
@@ -23,11 +24,19 @@ ssize_t	ft_write(int fd, const void *buf, size_t nbyte);
 
 void	test_write(t_tests	*tests)
 {
-	int	ret;
-	(void)tests;
 	char	*str = "hello\n";
-	ret = ft_write(50, str, 3);
-	printf("ret: %i\n", ret);
+	int		my_ret;
+	int		my_errno;
+	int		sy_ret;
+	int		sy_errno;
+
+
+	my_ret = ft_write(50, str, 3);
+	my_errno = errno;
+	sy_ret = write(50, str, 3);
+	sy_errno = errno;
+	ft_assert_cmp(my_ret, sy_ret, "Should be error", tests);
+	ft_assert_cmp(my_errno, sy_errno, "Should be error", tests);
 }	
 void	test_strcmp(t_tests *tests)
 {
