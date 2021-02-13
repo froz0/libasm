@@ -6,7 +6,7 @@
 /*   By: tmatis <tmatis@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/11/21 18:18:17 by tmatis            #+#    #+#             */
-/*   Updated: 2021/02/13 14:24:58 by tmatis           ###   ########.fr       */
+/*   Updated: 2021/02/13 17:19:30 by tmatis           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,7 +22,7 @@ void			ft_assert(int actual, char *behavior, t_tests *tests)
 	if (behavior && (tests->log_level >= 3
 			|| (!actual && tests->log_level >= 1)))
 	{
-		printf(behavior);
+		printf("%s", behavior);
 		printf("\n\n");
 	}
 }
@@ -48,7 +48,7 @@ void			ft_assert_cmp(
 				&& tests->log_level >= 1)))
 	{
 		printf("\033[0m");
-		printf(behavior);
+		printf("%s", behavior);
 		printf("\n\033[0m\n");
 	}
 }
@@ -92,9 +92,9 @@ void			ft_assert_strcmp(
 	if (act[i] == exp[i] && tests->log_level >= 4)
 	{
 		printf("\033[0;33m\033[3m\"");
-		printf(act);
+		printf("%s", act);
 		printf("\" == \"");
-		printf(exp);
+		printf("%s", exp);
 		printf("\033[0m\n       ");
 	}
 	else if (tests->log_level >= 3)
@@ -102,7 +102,7 @@ void			ft_assert_strcmp(
 	if (behavior && (tests->log_level >= 3 || ((act[i] != exp[i])
 				&& tests->log_level >= 1)))
 	{
-		printf(behavior);
+		printf("%s", behavior);
 		printf("\n\033[0m\n");
 	}
 }

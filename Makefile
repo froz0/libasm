@@ -6,7 +6,7 @@
 #    By: tmatis <tmatis@student.42.fr>              +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2021/02/13 14:30:35 by tmatis            #+#    #+#              #
-#    Updated: 2021/02/13 14:48:47 by tmatis           ###   ########.fr        #
+#    Updated: 2021/02/13 17:26:31 by tmatis           ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -36,11 +36,15 @@ $(NAME):	${OBJS_ASM}
 
 all:		$(NAME)
 
+test:		all ${OBJS_MAIN} ${OBJS_ASSERT}
+			clang -Wall -Wextra -Werror -o test ${OBJS_MAIN} ${OBJS_ASSERT} -L. -lasm
+
+
 clean:
 			@echo Cleaning
 			@rm -rf ${OBJS_ASSERT} ${OBJS_MAIN} ${OBJS_ASM}
 
-fclean: clean
+fclean: 	clean
 			rm -rf $(NAME) test
 
 re:	fclean all
