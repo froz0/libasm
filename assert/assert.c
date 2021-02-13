@@ -6,7 +6,7 @@
 /*   By: tmatis <tmatis@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/11/21 18:18:17 by tmatis            #+#    #+#             */
-/*   Updated: 2021/02/13 17:19:30 by tmatis           ###   ########.fr       */
+/*   Updated: 2021/02/13 18:31:07 by tmatis           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -74,7 +74,7 @@ static	void	ft_putdiff(char *actual, char *expected, int indexdiff)
 	ft_putstrun(actual, indexdiff);
 	printf("\" != \"");
 	ft_putstrun(expected, indexdiff);
-	printf("\033[0m\n       ");
+	printf("\"\033[0m\n       ");
 }
 
 void			ft_assert_strcmp(
@@ -87,7 +87,7 @@ void			ft_assert_strcmp(
 		i++;
 	if (act[i] == exp[i] && ++tests->tests_success && tests->log_level >= 3)
 		printf("\033[1;32m [OK] \033[0m");
-	else if (act[i] == exp[i] && ++tests->tests_failed && tests->log_level >= 1)
+	else if (act[i] != exp[i] && ++tests->tests_failed && tests->log_level >= 1)
 		printf("\033[1;31m [KO] \033[0m");
 	if (act[i] == exp[i] && tests->log_level >= 4)
 	{
@@ -95,9 +95,9 @@ void			ft_assert_strcmp(
 		printf("%s", act);
 		printf("\" == \"");
 		printf("%s", exp);
-		printf("\033[0m\n       ");
+		printf("\"\033[0m\n       ");
 	}
-	else if (tests->log_level >= 3)
+	else if (act[i] != exp[i] && tests->log_level >= 2)
 		ft_putdiff(act, exp, i);
 	if (behavior && (tests->log_level >= 3 || ((act[i] != exp[i])
 				&& tests->log_level >= 1)))

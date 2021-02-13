@@ -3,7 +3,7 @@ global		ft_strlen	; On declare ft_strlen pour que
 						; elle soit accessible de l'exterieur
 
 ft_strlen:				;flag strlen sera call en premier puis en decendant
-	xor		rcx, rcx
+	xor		rcx, rcx	;set count to 0 (rcx is a counter)
 
 count_char:
 						;cmp-> compare. byte dit que le saut se fait de 8 bit en 8 bit. rdi --> arg 1 rcx notre compteur. TF=1 si true
