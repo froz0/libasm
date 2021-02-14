@@ -6,7 +6,7 @@
 /*   By: tmatis <tmatis@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/02/13 13:39:27 by tmatis            #+#    #+#             */
-/*   Updated: 2021/02/13 23:25:58 by tmatis           ###   ########.fr       */
+/*   Updated: 2021/02/14 14:09:54 by tmatis           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,6 +23,24 @@ char	*ft_strcpy(char *dest, char *src);
 int		ft_strcmp(const char *s1, const char *s2);
 ssize_t	ft_write(int fd, const void *buf, size_t nbyte);
 ssize_t ft_read(int fd, void *buf, size_t nbyte);
+char	*ft_strdup(const char *s);
+
+void	test_strdup(t_tests *tests)
+{
+	char	*str = "hello world";
+	char	*str1 = "";
+	char	*my_dest;
+	char	*sy_dest;
+
+	ft_assert_strcmp(my_dest = ft_strdup(str),sy_dest = strdup(str),
+			"Should be the same data", tests);
+	free(my_dest);
+	free(sy_dest);
+	ft_assert_strcmp(my_dest = ft_strdup(str1),sy_dest = strdup(str1),
+			"Should be the same data", tests);
+	free(my_dest);
+	free(sy_dest);
+}
 
 void	test_write(t_tests	*tests)
 {
@@ -145,6 +163,7 @@ int	main(int argc, char **argv)
 	test_strcmp(&tests);
 	test_write(&tests);
 	test_read(&tests);
+	test_strdup(&tests);
 	tests_result(&tests);
 	return (0);
 }
